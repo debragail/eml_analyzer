@@ -8,7 +8,7 @@ from cli_formatter.output_formatting import colorize_string, Color, warning, err
 
 def show_header(parsed_eml: Message):
     print_headline_banner(headline='Header')
-    max_key_width = max([len(x) for x, _ in parsed_eml.items()])
+    max_key_width = max(len(x) for x, _ in parsed_eml.items())
     for key, value in parsed_eml.items():
         values_in_lines = value.split('\n')
         first_value = values_in_lines.pop(0)
@@ -146,8 +146,8 @@ def show_attachments(parsed_eml: Message):
     if len(attachments) == 0:
         info('E-Mail contains no attachments')
     else:
-        max_width_filename = max([len(filename) for (filename, content_type, disposition) in attachments]) + 7
-        max_width_content_type = max([len(content_type) for (filename, content_type, disposition) in attachments]) + 7
+        max_width_filename = max(len(filename) for (filename, content_type, disposition) in attachments) + 7
+        max_width_content_type = max(len(content_type) for (filename, content_type, disposition) in attachments) + 7
         for index, (filename, content_type, disposition) in enumerate(attachments):
             index_str = '[' + colorize_string(text=str(index+1), color=Color.CYAN) + ']'
             print(index_str, filename.ljust(max_width_filename), content_type.ljust(max_width_content_type), disposition)
