@@ -178,8 +178,8 @@ def extract_attachment(parsed_eml: Message, attachment_number: int, output_path:
         output_path = os.path.join(output_path, attachment.get_filename())
 
     payload = attachment.get_payload(decode=True)
-    output_file = open(output_path, mode='wb')
-    output_file.write(payload)
+    with open(output_path, mode='wb') as output_file:
+        output_file.write(payload)
     info('Attachment extracted to {}'.format(output_path))
 
 
